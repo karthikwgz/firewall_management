@@ -53,13 +53,10 @@ def setrl_menu():
         "3","Add Sources"
     )
     grid1.add_row(
-        "4","Add Services"
+        "4","Add  Source Port"
     )
     grid1.add_row(
-        "5","Add  Source Port"
-    )
-    grid1.add_row(
-        "6","Main menu"
+        "5","Main menu"
     )
     print(grid1)
     gv.gpr("Enter your choice : ")
@@ -78,49 +75,54 @@ def dltrl_menu():
         "3","Delete Sources"
     )
     grid1.add_row(
-        "4","Add Services"
+        "4","Delete Source Port"
     )
     grid1.add_row(
-        "5","Delete Source Port"
-    )
-    grid1.add_row(
-        "6","Main Menu"
+        "5","Main Menu"
     )
     print(grid1)
-    gv.gpr("Enter your choice : ")
 
 def dltrl_choice():
-	dltrl_menu()
-	ch = Prompt.ask("Enter your choice :",choices=["1","2","3","4"])
-	if ch == "1":
-		dt.delete_port()
-	elif ch == "2":
-		dt.delete_services()
-	elif ch == "3":
-		dt.delete_sources()
-	elif ch == "4":
-		dt.delete_source_port()
-	elif ch == "5":
-		main_menu()
-	else:
-		gv.rpr("\tWrong choice")
+    dltrl_menu()
+    ch = Prompt.ask("Enter your choice :",choices=["1","2","3","4","5"])
+    if ch == "1":
+        dt.delete_port()
+        dltrl_choice()
+    elif ch == "2":
+        dt.delete_services()
+        dltrl_choice()
+    elif ch == "3":
+        dt.delete_sources()
+        dltrl_choice()
+    elif ch == "4":
+        dt.delete_source_port()
+        dltrl_choice()
+    elif ch == "5":
+        main_choice()
+    else:
+        gv.rpr("\tWrong choice")
+        dltrl_choice()
 
 def setrl_choice():
-	setrl_menu()
-	ch = Prompt.ask("Enter your choice :",choices=["1","2","3","4","5"])
-	if ch == "1":
-		st.add_port()
-	elif ch == "2":
-		st.add_services()
-	elif ch == "3":
-		st.add_sources()
-	elif ch == "4":
-		st.add_source_port()
-		
-	elif ch == "5":
-		main_menu()
-	else:
-		gv.rpr("\tWrong choice")
+    setrl_menu()
+    ch = Prompt.ask("Enter your choice :",choices=["1","2","3","4","5"])
+    if ch == "1":
+        st.add_port()
+        setrl_choice()
+    elif ch == "2":
+        st.add_services()
+        setrl_choice()
+    elif ch == "3":
+        st.add_sources()
+        setrl_choice()
+    elif ch == "4":
+        st.add_source_port()
+        setrl_choice()
+    elif ch == "5":
+        main_choice()
+    else:
+        gv.rpr("\tWrong choice")
+        setrl_choice()
 
 
 def main_choice():
@@ -128,12 +130,15 @@ def main_choice():
     ch = Prompt.ask("\tEnter your choice :",choices=["1","2","3","4"])
     if ch == "1":
         gv.get_status()
+        main_choice()
     elif ch == "2":
-        setrl_menu()
+        setrl_choice()
     elif ch == "3":
-        dltrl_menu()
+        dltrl_choice()
     elif ch == "4":
         exit()
     else:
         gv.rpr("\tWrong choice")
-        main_menu()
+        main_choice()
+        
+main_choice()
